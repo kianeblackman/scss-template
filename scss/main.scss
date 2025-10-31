@@ -1,8 +1,6 @@
 /*
-
 This file is the entry point for the SCSS files.
 It imports all the other SCSS files excluding the tokens file which is imported directly into files that need it.
-
 */
 
 @use "base";

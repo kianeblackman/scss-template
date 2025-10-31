@@ -1,34 +1,17 @@
-@use './tokens' as tokens;
+/*
+MIXINS
+***********
+*/
 
-/**
+@use './tokens' as *;
 
-Breakpoints
-************
-
-Usage:
-
-@include breakpoint(sm) {
-  // Styles
-}
-
-**/
-
-@mixin breakpoint($breakpoint) {
-    @if $breakpoint == sm {
-      @media (max-width: tokens.$breakpoint-sm) {
-        @content;
-      }
-    } @else if $breakpoint == md {
-      @media (max-width: tokens.$breakpoint-md) {
-        @content;
-      }
-    } @else if $breakpoint == lg {
-      @media (max-width: tokens.$breakpoint-lg) {
-        @content;
-      }
-    } @else if $breakpoint == xl {
-      @media (min-width: tokens.$breakpoint-xl) {
-        @content;
-      }
+/// Mobile-first media query: applies styles from the given breakpoint and up
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
     }
+  } @else {
+    @warn "No value found for breakpoint `#{$breakpoint}`.";
   }
+}
